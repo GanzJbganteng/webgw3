@@ -1,0 +1,166 @@
+/* ──────────────────────────────────────────
+   Falcon UI Dashboard – Pure CSS
+   Author: YourName
+   Note: Works with index.html + script.js
+────────────────────────────────────────── */
+
+/* 1. ROOT THEME VARIABLES
+   Dark is default. Light will override via
+   body.light {...} in the switcher */
+:root {
+  --bg: #111;
+  --bg-alt: #181818;
+  --border: #303030;
+  --text: #eee;
+  --text-muted: #aaa;
+  --accent: #00bfff; /* cyan */
+  --radius: 8px;
+  --sidebar-width: 240px;
+  --transition: 0.25s;
+}
+
+/* Light overrides */
+body.light {
+  --bg: #f6f7f9;
+  --bg-alt: #fff;
+  --border: #dcdcdc;
+  --text: #222;
+  --text-muted: #555;
+  --accent: #006aff;
+}
+
+/* 2. RESET & BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html,body { height: 100%; }
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* 3. SIDEBAR */
+.sidebar {
+  width: var(--sidebar-width);
+  background: var(--bg-alt);
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: fixed;          /* sticks */
+  inset: 0 auto 0 0;
+  transition: background var(--transition);
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.sidebar nav ul { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+.sidebar a {
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: .5rem .8rem;
+  border-radius: var(--radius);
+  transition: background var(--transition), color var(--transition);
+}
+.sidebar a.active,
+.sidebar a:hover {
+  color: var(--text);
+  background: rgba(255,255,255,.06);
+}
+
+/* Theme toggle button */
+#themeToggle {
+  margin-top: auto;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 50%;
+  width: 40px; height: 40px;
+  cursor: pointer;
+  transition: background var(--transition), border var(--transition);
+}
+#themeToggle:hover { background: rgba(255,255,255,.08); }
+
+/* 4. MAIN CONTENT */
+.content {
+  margin-left: var(--sidebar-width);
+  padding: 2rem 3rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+header h1 { font-size: 2rem; }
+
+/* 5. PAGES */
+.page.hidden { display: none; }
+.page { animation: fade .3s ease; }
+@keyframes fade { from{opacity:0;transform:translateY(10px)} to{opacity:1} }
+
+label { display:block; margin-top:1rem; margin-bottom:.4rem; }
+input[type="text"] {
+  width: 100%;
+  padding: .6rem .8rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 1rem;
+  padding: .6rem 1.2rem;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+button:hover { opacity: .85; }
+
+.output {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+
+/* 6. TOASTS */
+.toast-container {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+.toast {
+  padding: .8rem 1rem;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--text);
+  min-width: 220px;
+  animation: slideUp .4s ease;
+}
+@keyframes slideUp { from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+
+/* 7. RESPONSIVE – collapse sidebar on small screens */
+@media (max-width: 640px) {
+  .sidebar { transform: translateX(-100%); transition: transform var(--transition); }
+  .sidebar.open { transform: translateX(0); }
+  .content { margin-left: 0; padding: 1.5rem 1rem; }
+}

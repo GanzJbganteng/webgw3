@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Falcon UI Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="logo">🦅 Falcon UI</div>
+    <nav>
+      <ul>
+        <li><a href="#" class="active" data-page="home">Home</a></li>
+        <li><a href="#" data-page="endpoints">Endpoints</a></li>
+        <li><a href="#" data-page="settings">Settings</a></li>
+        <li><a href="#" data-page="about">About</a></li>
+      </ul>
+    </nav>
+    <button id="themeToggle" aria-label="Toggle Dark Mode">🌙</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <header>
+      <h1 id="pageTitle">Home</h1>
+    </header>
+
+    <!-- Home Section -->
+    <section id="homeSection" class="page">
+      <p>Welcome to <strong>Falcon UI Dashboard</strong> (HTML‑only version).</p>
+      <p>This interface lets you test API endpoints without any backend code.</p>
+    </section>
+
+    <!-- Endpoints Section -->
+    <section id="endpointsSection" class="page hidden">
+      <h2>Test AI Hydromind Endpoint</h2>
+
+      <label for="textInput">Message</label>
+      <input type="text" id="textInput" placeholder="Enter text..." />
+
+      <button id="sendBtn">Send</button>
+
+      <h3>Response</h3>
+      <pre id="output" class="output">// Response will appear here</pre>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settingsSection" class="page hidden">
+      <h2>Settings</h2>
+      <p>Theme, API base URL, and more settings will go here.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="aboutSection" class="page hidden">
+      <h2>About</h2>
+      <p>This is an HTML‑only dashboard inspired by the Falcon‑Api‑UI project.</p>
+    </section>
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
